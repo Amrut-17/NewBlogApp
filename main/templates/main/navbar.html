@@ -1,0 +1,45 @@
+{% load static %}
+<nav>
+  <div class="logo">
+      BlogApp
+  </div>
+  
+  <input type="checkbox" id="click">
+  <label for="click" class="menu-btn">
+  <i class="fas fa-bars"></i>
+  </label>
+
+  
+  <ul>
+      {% if user.is_authenticated %}
+      <li>
+        <a class="active" href="/home/">Home</a>
+      </li>
+      <li>
+        <a href="/create-post/">Create Post</a>
+      </li>
+      <li>
+        <a href="">User | {{user.username}}</a>
+      </li>
+      <li>
+        <a href="/logout/">Logout</a>
+      </li>
+      {% else %}
+      <li>
+        <a href="/login/">Login</a>
+      </li>
+      <li>
+        <a href="/signup/">Signup</a>
+      </li>
+      {% endif %}
+      <li class='darkicon'>
+        <a href="" onclick='darkFunc()'><i class="fa fa-moon-o" style="font-size:24px"></i></a>
+      </li>
+  </ul>
+</nav>
+
+<script>
+  function darkFunc(){
+    body.style.backgroundColor = 'black'
+  }
+</script>

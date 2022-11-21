@@ -1,0 +1,54 @@
+{% extends 'main/core.html' %}
+
+{% block title %}
+    Home Page
+{% endblock title %}
+
+{% block content %}
+    <h2 class='mt-2'>POST'S</h2>
+    {% for post in posts %}
+        <div class="card mt-3">
+            <div class="card-header">
+                <strong>
+                    @{{post.author.username}}
+                </strong>
+            </div>
+            <div class="card-body d-flex flex-row justify-content-between">
+                <div class="">
+                    <h5 class="card-title">
+                        {{post.title}}
+                    </h5>
+                    <p>{{post.description}}</p>
+                </div>
+                <div class="">
+                    {% if user == post.author or perms.main.delete_post %}
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class='btn btn-danger' name='post-id' value={{post.id}}>DELETE</button>
+                        </form>
+                    {% endif %}
+                    {% if user.is_staff %}
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class='btn btn-warning mt-2' name='user-id' value={{post.author.id}}>BAN USER</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-footer text-muted d-flex flex-row justify-content-between">
+                <div class="">
+                    {{post.created_at}}
+                </div>
+                <div class="">
+                    <strong>
+                        @{{post.author.username}}
+                    </strong>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No posts yet...</p>
+    {% endfor %}
+{% endblock content %}
+
+Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed in neque suscipit optio nulla deleniti, atque impedit aut odio ipsum dolorum quasi possimus beatae quod quo molestiae, voluptates esse! Porro aspernatur quo, sit sint ut voluptate? Saepe repudiandae maxime suscipit cupiditate eos molestiae vitae voluptatibus dignissimos, ipsum pariatur aspernatur odio est reiciendis? Optio laborum voluptate ipsam autem mollitia fugit, eligendi at eaque numquam, labore sunt nam voluptates fugiat animi molestiae cupiditate. Voluptates aspernatur quibusdam soluta vero tenetur, corporis tempore eum, veniam alias nam adipisci illum ullam magnam fuga eos aliquam in qui dolores dolorem incidunt ipsum! Ipsa eaque repellendus doloribus.
